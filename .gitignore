@@ -3,8 +3,12 @@ data/raw/
 images_OBJ*/
 *.pt
 *.pth
-results/
+!milestone2/weights/*.pt
+/results/
 outputs/
+milestone2/yolo_data/
+milestone2/runs/
+milestone2/detections/
 
 # python / notebooks
 __pycache__/

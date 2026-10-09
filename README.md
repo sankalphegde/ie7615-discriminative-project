@@ -1,11 +1,22 @@
 # Identifying 73 Everyday Objects with CNNs
 
-**IE 7615 Deep Learning for AI · Discriminative Project, Milestone 1**<br>
+**IE 7615 Deep Learning for AI · Discriminative Project (Milestones 1 and 2)**<br>
 Study Group 6: Sankalp Hegde · Reshma Jose · Jairaghavendra Sridhar
 
 We compare a convolutional network trained from scratch against five ImageNet-pretrained CNNs (transfer learning) on a
 73-class single-object identification task built from photos taken by the whole class. Nine configurations were trained
 and evaluated on one shared, stratified train/validation/test split.
+
+| Milestone | Task | Best model | Result |
+|---|---|---|---|
+| **1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 |
+| **2** · [`milestone2/`](milestone2/) | Multi-object detection: ID + location of every object | YOLOv8s | 0.971 mAP@0.5, 0.963 mAP@0.5:0.95 |
+
+**Milestone 1** is documented below. **Milestone 2** has its own README: [`milestone2/README.md`](milestone2/README.md).
+
+---
+
+# Milestone 1: Single-Object Identification
 
 **Best model: ResNet50 (fine-tuned), 98.47% test accuracy, 0.9850 macro F1.**
 
@@ -113,6 +124,7 @@ paths at local folders.
 ├── assets/                       # figures used in this README (from the report)
 ├── data/
 │   └── object_ids.csv            # Object ID → object name (final class sheet)
+├── milestone2/                   # YOLOv8 detection: generator, training, weights, results, report
 ├── requirements.txt
 └── README.md
 ```
@@ -122,5 +134,5 @@ paths at local folders.
 - Small per-class sample size (about 65–70 training images per class) limits how far generalisation can be assessed.
 - Photos were taken independently with different phones, lighting and backgrounds.
 - A few look-alike object pairs still cause occasional errors in the best models.
-- **Milestone 2:** build multi-object images from these single-object photos and fine-tune **YOLOv8** to detect,
-  identify and locate every object.
+- **Milestone 2** (done, see [`milestone2/`](milestone2/)): multi-object images built from these single-object photos and
+  a fine-tuned **YOLOv8** that detects, identifies and locates every object.
