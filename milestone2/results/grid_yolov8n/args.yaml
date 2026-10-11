@@ -1,19 +1,19 @@
 task: detect
 mode: train
-model: yolov8s.pt
-data: yolo_data/data.yaml
-epochs: 40
+model: yolov8n.pt
+data: yolo_grids/data.yaml
+epochs: 50
 time: null
 patience: 15
-batch: 16
-imgsz: 640
+batch: 8
+imgsz: 1120
 save: true
-save_period: -1
+save_period: 5
 cache: false
 device: mps
 workers: 4
 project: /Users/sankalphegde/Desktop/deep learning/milestone2/runs
-name: yolov8s
+name: grid_yolov8n
 exist_ok: true
 pretrained: true
 cls_remap: true
@@ -102,7 +102,7 @@ perspective: 0.0
 flipud: 0.0
 fliplr: 0.5
 bgr: 0.0
-mosaic: 1.0
+mosaic: 0.5
 mixup: 0.0
 cutmix: 0.0
 copy_paste: 0.0
@@ -111,4 +111,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: /Users/sankalphegde/Desktop/deep learning/milestone2/runs/yolov8s
+save_dir: /Users/sankalphegde/Desktop/deep learning/milestone2/runs/grid_yolov8n

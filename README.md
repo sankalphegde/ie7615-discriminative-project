@@ -10,7 +10,7 @@ and evaluated on one shared, stratified train/validation/test split.
 | Milestone | Task | Best model | Result |
 |---|---|---|---|
 | **1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 |
-| **2** · [`milestone2/`](milestone2/) | Multi-object detection: ID + location of every object | YOLOv8s | 0.971 mAP@0.5, 0.963 mAP@0.5:0.95 |
+| **2** · [`milestone2/`](milestone2/) | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8n | 0.877 mAP@0.5, precision 0.872, recall 0.832 |
 
 **Milestone 1** is documented below. **Milestone 2** has its own README: [`milestone2/README.md`](milestone2/README.md).
 
@@ -124,7 +124,7 @@ paths at local folders.
 ├── assets/                       # figures used in this README (from the report)
 ├── data/
 │   └── object_ids.csv            # Object ID → object name (final class sheet)
-├── milestone2/                   # YOLOv8 detection: generator, training, weights, results, report
+├── milestone2/                   # YOLOv8 detection: labelling, grids, training, weights, results, report
 ├── requirements.txt
 └── README.md
 ```
@@ -134,5 +134,5 @@ paths at local folders.
 - Small per-class sample size (about 65–70 training images per class) limits how far generalisation can be assessed.
 - Photos were taken independently with different phones, lighting and backgrounds.
 - A few look-alike object pairs still cause occasional errors in the best models.
-- **Milestone 2** (done, see [`milestone2/`](milestone2/)): multi-object images built from these single-object photos and
+- **Milestone 2** (done, see [`milestone2/`](milestone2/)): multi-object grid images built from these single-object photos and
   a fine-tuned **YOLOv8** that detects, identifies and locates every object.

@@ -1,0 +1,1 @@
+{"sampled": 64, "correct": 63, "notes": "The sample had 32 verified and 32 single-model boxes. The one imperfect box (single-model, Nike sneakers OBJ010) covered only one shoe of the pair; none of the 64 boxes was on the wrong item. Single-model boxes are slightly looser on average but still enclose the object."}

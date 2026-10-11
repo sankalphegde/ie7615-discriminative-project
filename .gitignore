@@ -7,8 +7,14 @@ images_OBJ*/
 /results/
 outputs/
 milestone2/yolo_data/
+milestone2/yolo_grids/
 milestone2/runs/
 milestone2/detections/
+milestone2/labeling/*.jpg
+milestone2/labeling/*.pt
+milestone2/labeling/*.ts
+*.jpg
+*.jpeg
 
 # python / notebooks
 __pycache__/

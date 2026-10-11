@@ -1,7 +1,11 @@
 ultralytics>=8.3
 torch>=2.2
 torchvision>=0.17
-numpy
+transformers>=4.45
 pandas
+numpy
 matplotlib
 pillow
+pyyaml
+pypdf
+reportlab
