@@ -26,7 +26,7 @@ HERE = Path(__file__).resolve().parent
 RUNS, GRIDS, LAB, REPORT = HERE / "runs", HERE / "yolo_grids", HERE / "labeling", HERE / "report"
 DATA = HERE.parent / "data" / "raw" / "IE7615 Deep Learning for AI"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-REPO = "https://github.com/sankalphegde/ie7615-discriminative-project"
+REPO = "https://github.com/sankalphegde/ie7615-discriminative-project/tree/main/milestone2"
 TEAM = "Jairaghavendra Sridhar · Reshma Jose · Sankalp Hegde"
 DUE = "October 11, 2026"
 RUN_NAMES = {"grid_yolov8n": "YOLOv8n", "grid_yolov8s": "YOLOv8s"}
@@ -465,7 +465,7 @@ Those photos are typically the hardest ones (small, thin or cluttered objects), 
 
 <h2>10. Code Repository</h2>
 <p>All code for this milestone (labelling, label checking, grid generation, training, evaluation and the detection script) and
-the trained weights are publicly available on GitHub, in the <i>milestone2</i> folder. Following the course instructions, no image
+the trained weights are publicly available in the <i>milestone2</i> folder of our GitHub repository. Following the course instructions, no image
 data is included in the repository.</p>
 <p><a href="{REPO}">{REPO}</a></p>
 </body></html>"""

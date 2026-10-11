@@ -1,22 +1,22 @@
-# Identifying 73 Everyday Objects with CNNs
+# IE 7615 Discriminative Project: Identifying and Detecting Everyday Objects
 
-**IE 7615 Deep Learning for AI · Discriminative Project (Milestones 1 and 2)**<br>
-Study Group 6: Sankalp Hegde · Reshma Jose · Jairaghavendra Sridhar
+**IE 7615 Deep Learning for AI** · Study Group 6: Sankalp Hegde · Reshma Jose · Jairaghavendra Sridhar
 
-We compare a convolutional network trained from scratch against five ImageNet-pretrained CNNs (transfer learning) on a
-73-class single-object identification task built from photos taken by the whole class. Nine configurations were trained
-and evaluated on one shared, stratified train/validation/test split.
+| | Task | Best model | Result | Code + report |
+|---|---|---|---|---|
+| **Milestone 1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 | this page ↓ · [`notebooks/`](notebooks/) · [`report/`](report/Milestone1_Report.pdf) |
+| **Milestone 2** | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8s | 0.893 mAP@0.5, precision 0.890, recall 0.856 | **[`milestone2/`](milestone2/)** · [`report`](milestone2/report/Milestone2_Report.pdf) |
 
-| Milestone | Task | Best model | Result |
-|---|---|---|---|
-| **1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 |
-| **2** · [`milestone2/`](milestone2/) | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8s | 0.893 mAP@0.5, precision 0.890, recall 0.856 |
-
-**Milestone 1** is documented below. **Milestone 2** has its own README: [`milestone2/README.md`](milestone2/README.md).
+> **Milestone 2 is in the [`milestone2/`](milestone2/) folder**, with its own README, code, labels, trained weights,
+> results and report.
 
 ---
 
 # Milestone 1: Single-Object Identification
+
+We compare a convolutional network trained from scratch against five ImageNet-pretrained CNNs (transfer learning) on a
+73-class single-object identification task built from photos taken by the whole class. Nine configurations were trained
+and evaluated on one shared, stratified train/validation/test split.
 
 **Best model: ResNet50 (fine-tuned), 98.47% test accuracy, 0.9850 macro F1.**
 
