@@ -10,7 +10,7 @@ and evaluated on one shared, stratified train/validation/test split.
 | Milestone | Task | Best model | Result |
 |---|---|---|---|
 | **1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 |
-| **2** · [`milestone2/`](milestone2/) | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8n | 0.877 mAP@0.5, precision 0.872, recall 0.832 |
+| **2** · [`milestone2/`](milestone2/) | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8s | 0.893 mAP@0.5, precision 0.890, recall 0.856 |
 
 **Milestone 1** is documented below. **Milestone 2** has its own README: [`milestone2/README.md`](milestone2/README.md).
 

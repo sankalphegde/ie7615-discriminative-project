@@ -12,11 +12,19 @@ label and grid image from the course dataset.
 
 ## Results (test set: 150 grid images, 2,220 objects)
 
-| Model | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Params | Inference (ms/img) |
-|---|---:|---:|---:|---:|---:|---:|
-| YOLOv8n | 0.877 | 0.779 | 0.872 | 0.832 | 3.1M | 3.9 |
+**Selected model: YOLOv8s.**
 
-Test mAP@0.5 by grid size (YOLOv8n): 2×2 0.845 · 3×3 0.908 · 4×4 0.854 · 5×4 0.885 · 5×5 0.904.
+| Model | mAP@0.5 | mAP@0.5:0.95 | Precision | Recall | Params | Epochs / batch | Inference (ms/img) |
+|---|---:|---:|---:|---:|---:|---|---:|
+| **YOLOv8s** | **0.893** | **0.816** | **0.890** | **0.856** | 11.2M | 30 / 4 | 4.6 |
+| YOLOv8n | 0.877 | 0.779 | 0.872 | 0.832 | 3.1M | 50 / 8 | 3.9 |
+
+Test mAP@0.5 by grid size:
+
+| Model | 2×2 | 3×3 | 4×4 | 5×4 | 5×5 |
+|---|---:|---:|---:|---:|---:|
+| YOLOv8s | 0.828 | 0.920 | 0.878 | 0.899 | 0.915 |
+| YOLOv8n | 0.845 | 0.908 | 0.854 | 0.885 | 0.904 |
 Inference time measured on an Apple M4 GPU at 1120-pixel input. Full metrics, per-class AP and the most frequent
 confusions are in [`results/`](results/).
 
@@ -64,8 +72,8 @@ contrast / saturation jitter. YOLO class *k* maps to the *k*-th Object ID in `da
 Object IDs themselves.
 
 ### 4. Training and evaluation: [`train_yolo.py`](train_yolo.py), [`evaluate_yolo.py`](evaluate_yolo.py)
-COCO-pretrained YOLOv8, `imgsz=1120` (the largest grid), batch 8, early stopping (patience 15), checkpoints every
-5 epochs. Evaluation reports val/test metrics, test metrics per grid size, per-class AP and confusions.
+COCO-pretrained YOLOv8, `imgsz=1120` (the largest grid), batch 8 for YOLOv8n and 4 for YOLOv8s (memory), early
+stopping (patience 15), checkpoints every 5 epochs. Evaluation reports val/test metrics, test metrics per grid size, per-class AP and confusions.
 
 ### 5. Detecting IDs and locations: [`detect_objects.py`](detect_objects.py)
 ```bash
@@ -79,7 +87,7 @@ test_00001.jpg: 10 object(s)
   ...
 ```
 It prints the Object ID, name, confidence and box (pixels) of every object and saves an annotated copy to
-`detections/`. Uses [`weights/grid_yolov8n_best.pt`](weights/) by default.
+`detections/`. Uses [`weights/grid_yolov8s_best.pt`](weights/) by default (`--weights weights/grid_yolov8n_best.pt` for the smaller model).
 
 ## How to run
 
@@ -91,7 +99,7 @@ python label_objects.py   --data "$DATA" --split split.csv           # -> labeli
 python check_labels.py    --data "$DATA"                             # -> labeling/check_*.jpg
 python generate_grids.py  --data "$DATA" --labels labeling/box_labels.csv --out yolo_grids
 python train_yolo.py      --model yolov8n.pt --name grid_yolov8n --epochs 50     # --device 0 on CUDA / Colab
-python train_yolo.py      --model yolov8s.pt --name grid_yolov8s --epochs 40
+python train_yolo.py      --model yolov8s.pt --name grid_yolov8s --epochs 30 --batch 4
 python detect_objects.py  yolo_grids/images/test/test_00001.jpg
 python make_report_m2.py                                             # -> report/Milestone2_Report.pdf
 ```

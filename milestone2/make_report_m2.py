@@ -411,9 +411,9 @@ random horizontal flip (the box is mirrored with it) and brightness, contrast an
 with the detection head re-initialised for our {n_cls} classes.</p>
 <ul>
 <li>Image size: 1120, matching the largest grid, so objects in 5×5 grids are not shrunk</li>
-<li>Batch size: 8</li>
+<li>Batch size: 8 for YOLOv8n; 4 for YOLOv8s, which did not fit in memory at batch 8 with 1120-pixel images</li>
 <li>Optimizer and learning-rate schedule: Ultralytics defaults (automatic optimizer selection with warm-up)</li>
-<li>Up to 50 epochs for YOLOv8n and 40 for YOLOv8s, early stopping with patience 15; the best epoch by validation fitness is kept</li>
+<li>Up to 50 epochs for YOLOv8n and 30 for YOLOv8s (the larger model is about twice as slow per epoch), early stopping with patience 15; the best epoch by validation fitness is kept</li>
 <li>Training-time augmentation: mosaic (50%, turned off for the last 10 epochs), HSV jitter, horizontal flip, scale and translation</li>
 <li>Checkpoints saved every 5 epochs; trained on an Apple M4 GPU (PyTorch MPS)</li>
 </ul>

@@ -45,7 +45,7 @@ def detect(model, path, names, conf, out_dir):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("images", nargs="+")
-    ap.add_argument("--weights", default=str(HERE / "weights" / "grid_yolov8n_best.pt"))
+    ap.add_argument("--weights", default=str(HERE / "weights" / "grid_yolov8s_best.pt"))
     ap.add_argument("--conf", type=float, default=0.25)
     ap.add_argument("--out", default="detections")
     args = ap.parse_args()
