@@ -64,7 +64,7 @@ def classify(img):
 
 def _predict(img, conf, scale=1.0):
     model, names = detector()
-    res = model.predict(img, conf=conf, imgsz=1120, verbose=False)[0]
+    res = model.predict(img, conf=conf, imgsz=1120, agnostic_nms=True, iou=0.5, verbose=False)[0]  # one box per object
     rows = []
     for b in res.boxes:
         oid = res.names[int(b.cls)]
@@ -73,7 +73,18 @@ def _predict(img, conf, scale=1.0):
     return rows
 
 
+def _on_canvas(img, conf):
+    """Run the detector at its training scale: the photo shrunk to a 224 px grid cell on a 2x2 (448 px) canvas."""
+    s = 224 / max(img.size)
+    small = img.resize((max(1, round(img.width * s)), max(1, round(img.height * s))))
+    canvas = Image.new("RGB", (448, 448), (127, 127, 127))
+    canvas.paste(small, (0, 0))
+    return [r for r in _predict(canvas, conf, scale=s) if r[3][0] < img.width and r[3][1] < img.height]
+
+
 def detect(img, conf=0.25):
+    if max(img.size) <= 448 and not is_grid(img):     # a single class photo (224 px): use the training scale directly
+        return sorted(_on_canvas(img, conf), key=lambda r: -r[2])
     rows = _predict(img, conf)
     if not rows and not is_grid(img):
         # The detector was trained on grids of 224 px photos. A full-size photo shows objects far larger than
