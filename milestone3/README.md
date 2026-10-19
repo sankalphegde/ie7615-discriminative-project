@@ -1,6 +1,9 @@
 # Milestone 3: Live demo
 
-Two scripts, one per demo task:
+**Easiest:** `python live_demo.py single photo.jpg` and `python live_demo.py multi grid.jpg` open a window with the
+photo and the model's answer drawn on it (close the window to go to the next image).
+
+Or the plain terminal versions, one per demo task:
 
 | Task | Model | Command |
 |---|---|---|
