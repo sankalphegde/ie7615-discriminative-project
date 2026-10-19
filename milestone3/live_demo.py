@@ -5,8 +5,8 @@
     python live_demo.py single photo.jpg              # (a) one object   -> Object ID (ConvNeXt-Tiny, Milestone 1)
     python live_demo.py multi  grid.jpg               # (b) many objects -> ID + box for every object (YOLOv8s, Milestone 2)
 
-auto: images whose sides are multiples of 224 px and larger than one tile (448, 672, 896, 1120) are grids and go to
-the detector; any other image is shown with both the single-object ID and the detector's boxes.
+auto: grids (sides that are multiples of 224 px, 448 to 1120) and any image where the detector finds 2+ objects get the
+multi-object view (box + ID on every object); otherwise the single-object view (ID from the classifier + detector box).
 Close the window (or press q) to continue. Results are also printed in the terminal. --save writes them to shown/.
 """
 import argparse
@@ -146,10 +146,10 @@ def run_single(p, save):
     show(fig, p, save)
 
 
-def run_multi(p, save):
+def run_multi(p, save, img=None, rows=None):
     import matplotlib.pyplot as plt
-    img = open_rgb(p)
-    rows = detect(img)
+    img = img or open_rgb(p)
+    rows = detect(img) if rows is None else rows
     print(f"\n{Path(p).name}: {len(rows)} detection(s)")
     print_rows(rows)
     fig, ax = plt.subplots(figsize=(9, 9.6))
@@ -160,11 +160,12 @@ def run_multi(p, save):
     show(fig, p, save)
 
 
-def run_both(p, save):
-    """Not a grid: show the single-object ID and the detector's boxes side by side."""
+def run_both(p, save, img=None, rows=None):
+    """One object: show the single-object ID next to the detector's box."""
     import matplotlib.pyplot as plt
-    img = open_rgb(p)
-    preds, rows = classify(img), detect(img)
+    img = img or open_rgb(p)
+    rows = detect(img) if rows is None else rows
+    preds = classify(img)
     oid, name, conf = preds[0]
     print(f"\n{Path(p).name}")
     print(f"  single-object model:  {oid}  {name}  ({conf:.1%})")
@@ -182,8 +183,13 @@ def run_both(p, save):
 
 
 def run_auto(p, save):
+    """Grids, and any image where the detector finds 2+ objects -> multi-object view; otherwise single-object view."""
     img = open_rgb(p)
-    (run_multi if is_grid(img) else run_both)(p, save)
+    rows = detect(img)
+    if is_grid(img) or len(rows) >= 2:
+        run_multi(p, save, img, rows)
+    else:
+        run_both(p, save, img, rows)
 
 
 def expand(paths):
