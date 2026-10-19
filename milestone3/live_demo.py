@@ -2,6 +2,7 @@
 
     python live_demo.py auto  image.jpg [more ...]    # picks the right model for each image (recommended)
     python live_demo.py watch ~/Downloads             # waits for new images in a folder and shows each one automatically
+    python live_demo.py latest [-n 4]                 # shows the newest image (or newest 4) in Downloads
     python live_demo.py single photo.jpg              # (a) one object   -> Object ID (ConvNeXt-Tiny, Milestone 1)
     python live_demo.py multi  grid.jpg               # (b) many objects -> ID + box for every object (YOLOv8s, Milestone 2)
 
@@ -223,14 +224,22 @@ def watch(folder, save):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["auto", "watch", "single", "multi"])
-    ap.add_argument("paths", nargs="+")
+    ap.add_argument("mode", choices=["auto", "watch", "latest", "single", "multi"])
+    ap.add_argument("paths", nargs="*")
+    ap.add_argument("-n", type=int, default=1, help="latest: how many of the newest images to show")
     ap.add_argument("--save", action="store_true", help="save results to shown/ instead of opening windows")
     args = ap.parse_args()
     if args.save:
         matplotlib.use("Agg")
     if args.mode == "watch":
-        return watch(args.paths[0], args.save)
+        return watch(args.paths[0] if args.paths else "~/Downloads", args.save)
+    if args.mode == "latest":                      # newest image(s) in Downloads (or the given folder), newest last
+        folder = Path(args.paths[0] if args.paths else "~/Downloads").expanduser()
+        imgs = sorted((q for q in folder.iterdir() if q.suffix.lower() in EXTS), key=lambda q: q.stat().st_mtime)
+        if not imgs:
+            return print(f"No images in {folder}")
+        args.paths, args.mode = [str(q) for q in imgs[-args.n:]], "auto"
+        print("Showing:", ", ".join(Path(q).name for q in args.paths))
     run = {"auto": run_auto, "single": run_single, "multi": run_multi}[args.mode]
     for p in expand(args.paths):
         try:
