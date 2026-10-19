@@ -1,7 +1,8 @@
 # Milestone 3: Live demo
 
-**Easiest:** `python live_demo.py single photo.jpg` and `python live_demo.py multi grid.jpg` open a window with the
-photo and the model's answer drawn on it (close the window to go to the next image).
+**Easiest:** `python live_demo.py auto image.jpg` picks the right model for each image and opens a window with the answer
+drawn on it. `python live_demo.py watch ~/Downloads` shows every new image that lands in a folder automatically
+(handy when images are sent during the demo). `single` / `multi` force one model. iPhone `.heic` photos work too.
 
 Or the plain terminal versions, one per demo task:
 
@@ -15,7 +16,7 @@ Or the plain terminal versions, one per demo task:
 ```bash
 git clone https://github.com/sankalphegde/ie7615-discriminative-project.git
 cd ie7615-discriminative-project/milestone3
-pip install ultralytics            # also installs torch, torchvision and pillow
+pip install ultralytics pillow-heif   # also installs torch, torchvision and pillow
 
 python identify_object.py path/to/photo.jpg                       # (a)
 python ../milestone2/detect_objects.py path/to/grid.jpg --out shown   # (b), annotated image saved to shown/
