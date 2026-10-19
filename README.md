@@ -7,6 +7,8 @@
 | **Milestone 1** | Single-object identification (73 classes) | ResNet50 (fine-tuned) | 98.47% test accuracy, 0.9850 macro F1 | this page ↓ · [`notebooks/`](notebooks/) · [`report/`](report/Milestone1_Report.pdf) |
 | **Milestone 2** | Multi-object detection on 2×2 to 5×5 grids (72 IDs): ID + location of every object | YOLOv8s | 0.893 mAP@0.5, precision 0.890, recall 0.856 | **[`milestone2/`](milestone2/)** · [`report`](milestone2/report/Milestone2_Report.pdf) |
 
+> **Live demo (Milestone 3): see [`milestone3/`](milestone3/)**, one command per demo task, or the Colab notebook.
+>
 > **Milestone 2 is in the [`milestone2/`](milestone2/) folder**, with its own README, code, labels, trained weights,
 > results and report.
 
